@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- vibrant sci-fi gradient background -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:startColor="#041E42"
+                android:centerColor="#0B2A52"
+                android:endColor="#3D0B66"
+                android:type="linear" />
+        </shape>
+    </item>
+    <!-- subtle center glow -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#6600E5FF"
+                android:centerColor="#3300E5FF"
+                android:endColor="#0000E5FF"
+                android:type="radial"
+                android:gradientRadius="38dp" />
+        </shape>
+    </item>
+</layer-list>

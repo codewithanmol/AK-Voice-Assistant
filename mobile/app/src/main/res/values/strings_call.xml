@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="call_brand">AK // DIRECT LINK</string>
+    <string name="call_chip">DTLS-SRTP · P2P</string>
+    <string name="call_orb">AK</string>
+    <string name="call_name">AK ASSISTANT</string>
+    <string name="call_connecting">LINKING NEURAL CHANNEL…</string>
+    <string name="call_connected">UPLINK ESTABLISHED</string>
+    <string name="call_hint">AK ko call lag rahi hai…</string>
+    <string name="call_speaking_hint">Boliye — AK sun raha hai</string>
+    <string name="call_fail_hint">Server chalu hai? Tailscale ON hai?</string>
+    <string name="call_end">End call</string>
+    <string name="call_mute">Mute</string>
+    <string name="call_speaker">Speaker</string>
+    <string name="call_timer_zero">00:00</string>
+    <string name="call_open">Call AK</string>
+    <string name="hud_mute">MUTE</string>
+    <string name="hud_end">END</string>
+    <string name="hud_spkr">SPKR</string>
+    <string name="hud_footer">LOCAL CORE // NEURAL LINK</string>
+</resources>

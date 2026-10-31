@@ -1,0 +1,85 @@
+# --- Secrets & environment ---
+.env
+.env.*
+!.env.example
+.owner/
+.owner
+*.pem
+*.pem.*
+*.key
+*.pem
+*.enc
+server_secret.txt
+app_allow.json
+pair.allow
+security/*.key
+security/*.enc
+security/*.txt
+security/app_allow.json
+security/pair.allow
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Large models / caches ---
+models/
+AK/.cache/
+.cache/
+
+# --- Runtime data, logs, generated output ---
+data/*.sqlite3
+data/*.db-journal
+data/*.log
+data/state.json
+data/gita_state.json
+data/LocalAgent/
+logs/
+reports/
+backups/
+Temp/
+temp_download/
+scratch/
+archive/
+*.log
+
+# --- TLS certs (generate locally with scripts/gen_https_cert.py) ---
+certs/
+
+# --- Android / mobile ---
+mobile/.gradle/
+mobile/.kotlin/
+mobile/local.properties
+mobile/*.jks
+mobile/*.keystore
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+.vscode/
+.idea/
+*.swp
+*~

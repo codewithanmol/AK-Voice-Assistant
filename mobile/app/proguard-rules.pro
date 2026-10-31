@@ -1,0 +1,1 @@
+# Keep OkHttp simple; no extra rules needed.

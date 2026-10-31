@@ -1,0 +1,13 @@
+body {
+    background-color: gray;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: maroon;
+}
+
+p {
+    margin: 20px;
+}

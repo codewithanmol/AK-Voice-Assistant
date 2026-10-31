@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group android:scaleX="1.0" android:scaleY="1.0" android:pivotX="54" android:pivotY="54">
+        <!-- outer neon ring -->
+        <path
+            android:pathData="M54,20 a34,34 0 1,0 0.1,0"
+            android:strokeColor="#AA00E5FF"
+            android:strokeWidth="2.5"
+            android:fillColor="#00000000" />
+        <!-- floor glow -->
+        <path
+            android:fillColor="#3300E5FF"
+            android:pathData="M54,12 L26,68 H45 L40,92 L82,44 H59 Z" />
+        <!-- main lightning bolt -->
+        <path
+            android:fillColor="#FF00E5FF"
+            android:pathData="M60,20 L38,58 H52 L47,84 L72,46 H57 Z" />
+        <!-- inner spark highlight -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M55,36 L52,42 H55 L51,50 L58,42 H54 Z"
+            android:fillAlpha="0.9" />
+    </group>
+</vector>

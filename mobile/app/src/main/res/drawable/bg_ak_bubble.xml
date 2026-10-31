@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- vibe underlay -->
+    <item android:left="-10dp" android:bottom="-8dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#33B388FF"
+                android:endColor="#00B388FF"
+                android:type="linear" />
+            <corners android:radius="18dp" />
+        </shape>
+    </item>
+    <!-- glass panel -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:startColor="@color/bubbleAkStart"
+                android:endColor="@color/bubbleAkEnd"
+                android:type="linear" />
+            <corners android:radius="18dp" />
+            <stroke android:width="1dp" android:color="#2E00E5FF" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,7 @@
+STT fixes summary
+- AK/stt.py: hotwords+beam5 defaults, LocalSTT accepts/passes them
+- AK/voice.py: merge hotwords, Google->Whisper fallback hardened, encoding fixes
+- AK/stt_fix.py: repair_music (artist normalization + play recovery)
+- main.py: correct+repair after STT, clean song query
+- config.json: google + local enabled, beam5, mic1, lang en-IN
+- Verified: compile OK, 32+tests PASS (music+e2e+neutral)

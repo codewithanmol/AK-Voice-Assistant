@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- outer glow -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="#3339FF88"
+                android:endColor="#0039FF88"
+                android:type="radial"
+                android:gradientRadius="18dp" />
+        </shape>
+    </item>
+    <!-- soft halo -->
+    <item
+        android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp">
+        <shape android:shape="oval">
+            <solid android:color="#CC39FF88" />
+        </shape>
+    </item>
+    <!-- core dot -->
+    <item
+        android:left="6dp" android:top="6dp" android:right="6dp" android:bottom="6dp">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>AK Call</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+        body { background: radial-gradient(circle at 50% 20%, #1a1418 0%, #0a0a0a 60%); color: white; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 60px 20px; }
+        .caller-info { text-align: center; }
+        .avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #ff6b6b, #ee5a24); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; box-shadow: 0 0 60px rgba(238,90,36,.35); }
+        .name { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+        .status { font-size: 15px; opacity: .75; min-height: 22px; line-height: 1.4; }
+        .controls { display: flex; gap: 48px; margin-bottom: 40px; }
+        .btn { width: 70px; height: 70px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .15s, opacity .15s; }
+        .btn:active { transform: scale(.92); }
+        .accept { background: #2ed573; }
+        .reject { background: #ff4757; }
+        .end { background: #ff4757; display: none; }
+        .mute { background: rgba(255,255,255,0.18); display: none; }
+        .mute.off { background: #ff4757; }
+        svg { width: 32px; height: 32px; fill: white; }
+        .active { display: flex; }
+    </style>
+</head>
+<body>
+    <div class="caller-info">
+        <div class="avatar">AK</div>
+        <div class="name">AK Assistant</div>
+        <div class="status" id="status">Incoming call...</div>
+    </div>
+    <div class="controls">
+        <button class="btn reject" id="reject" aria-label="Reject">
+            <svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+        </button>
+        <button class="btn mute" id="mute" aria-label="Mute">
+            <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+        </button>
+        <button class="btn accept" id="accept" aria-label="Accept">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </button>
+        <button class="btn end" id="end" aria-label="End call">
+            <svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+        </button>
+    </div>
+
+    <audio id="remoteAudio" autoplay playsinline></audio>
+    <audio id="localAudio" muted></audio>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session') || 'default';
+        const token = urlParams.get('token') || '';
+
+        const statusEl = document.getElementById('status');
+        const acceptBtn = document.getElementById('accept');
+        const rejectBtn = document.getElementById('reject');
+        const endBtn = document.getElementById('end');
+        const muteBtn = document.getElementById('mute');
+        const remoteAudio = document.getElementById('remoteAudio');
+        const localAudio = document.getElementById('localAudio');
+
+        let pc = null;
+        let localStream = null;
+        let muted = false;
+
+        function setStatus(text) { statusEl.textContent = text; }
+
+        function showInCall() {
+            acceptBtn.style.display = 'none';
+            rejectBtn.style.display = 'none';
+            endBtn.classList.add('active');
+            muteBtn.classList.add('active');
+        }
+
+        function cleanup() {
+            try { if (pc) pc.close(); } catch (e) {}
+            try {
+                if (localStream) localStream.getTracks().forEach(t => t.stop());
+            } catch (e) {}
+            pc = null;
+            localStream = null;
+        }
+
+        async function startCall() {
+            if (!window.isSecureContext) {
+                setStatus('Mic blocked: HTTPS chahiye. Call link https:// se kholo.');
+                return;
+            }
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                setStatus('Is browser me microphone support nahi hai.');
+                return;
+            }
+            try {
+                setStatus('Mic permission...');
+                localStream = await navigator.mediaDevices.getUserMedia({
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true
+                    },
+                    video: false
+                });
+                localAudio.srcObject = localStream;
+                showInCall();
+                setStatus('Connecting...');
+
+                pc = new RTCPeerConnection({ iceServers: [] });
+
+                pc.ontrack = (e) => {
+                    const stream = (e.streams && e.streams.length)
+                        ? e.streams[0]
+                        : new MediaStream([e.track]);
+                    remoteAudio.srcObject = stream;
+                    remoteAudio.play().catch(() => {});
+                };
+
+                pc.onconnectionstatechange = () => {
+                    const s = pc ? pc.connectionState : 'closed';
+                    if (s === 'connected') setStatus('Connected');
+                    else if (s === 'disconnected') setStatus('Reconnecting...');
+                    else if (s === 'failed') { setStatus('Connection failed'); cleanup(); }
+                    else if (s === 'closed') setStatus('Call ended');
+                };
+
+                localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+
+                const offer = await pc.createOffer();
+                await pc.setLocalDescription(offer);
+                await new Promise((resolve) => {
+                    if (pc.iceGatheringState === 'complete') return resolve();
+                    const done = () => {
+                        if (pc.iceGatheringState === 'complete') {
+                            pc.removeEventListener('icegatheringstatechange', done);
+                            resolve();
+                        }
+                    };
+                    pc.addEventListener('icegatheringstatechange', done);
+                    setTimeout(resolve, 2500);
+                });
+
+                const resp = await fetch('/api/call/offer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token ? 'Bearer ' + token : ''
+                    },
+                    body: JSON.stringify({
+                        session_id: sessionId,
+                        sdp: pc.localDescription
+                    })
+                });
+
+                if (!resp.ok) {
+                    if (resp.status === 401) {
+                        setStatus('Call link invalid/expired - app se naya call shuru karo.');
+                    } else {
+                        setStatus('Server error (' + resp.status + ')');
+                    }
+                    cleanup();
+                    return;
+                }
+
+                const data = await resp.json();
+                if (!data.answer) {
+                    setStatus('Failed to connect');
+                    cleanup();
+                    return;
+                }
+                await pc.setRemoteDescription(new RTCSessionDescription(data.answer));
+                setStatus('Connected - boliye');
+            } catch (e) {
+                console.error(e);
+                setStatus('Error: ' + e.message);
+                cleanup();
+            }
+        }
+
+        acceptBtn.addEventListener('click', startCall);
+        rejectBtn.addEventListener('click', () => { cleanup(); window.close(); });
+        endBtn.addEventListener('click', () => {
+            cleanup();
+            setStatus('Call ended');
+            endBtn.classList.remove('active');
+            muteBtn.classList.remove('active');
+        });
+        muteBtn.addEventListener('click', () => {
+            if (!localStream) return;
+            muted = !muted;
+            localStream.getAudioTracks().forEach(t => { t.enabled = !muted; });
+            muteBtn.classList.toggle('off', muted);
+            setStatus(muted ? 'Muted' : 'Connected - boliye');
+        });
+    </script>
+</body>
+</html>

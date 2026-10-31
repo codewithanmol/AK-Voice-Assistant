@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bgDark">#05070D</color>
+    <color name="chatBg">#070B14</color>
+    <color name="topBarBg">#0A0F1C</color>
+    <color name="panelBg">#0D1322</color>
+    <color name="inputBg">#101A2C</color>
+
+    <color name="primary">#00E5FF</color>
+    <color name="secondary">#B388FF</color>
+    <color name="accent">#39FF88</color>
+    <color name="danger">#FF4D6D</color>
+
+    <color name="ok">#39FF88</color>
+    <color name="bad">#FF4D6D</color>
+    <color name="warn">#FFC24D</color>
+
+    <color name="textPrimary">#EAF6FF</color>
+    <color name="textSecondary">#7B8CA8</color>
+
+    <color name="bubbleUserStart">#00E5FF</color>
+    <color name="bubbleUserEnd">#00A3CF</color>
+    <color name="textOnUser">#021014</color>
+    <color name="textOnUserFaded">#0A2A35</color>
+
+    <color name="bubbleAkStart">#16203A</color>
+    <color name="bubbleAkEnd">#0C1220</color>
+    <color name="textOnAk">#CFF6FF</color>
+    <color name="textOnAkFaded">#5FA8C4</color>
+</resources>

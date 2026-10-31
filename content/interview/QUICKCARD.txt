@@ -1,0 +1,23 @@
+AI STREET INTERVIEW - QUICK CARD (phone me yeh rakh)
+
+COLD OPEN (3 sec): "Yeh AI mujhe jaanta hai. Kya aapko bhi jaanta hai?"
+
+5 CORE QUESTIONS - hamesha same order:
+1. Tumhara naam kya hai?        -> AK, Anmol Tyagi ki personal AI assistant, local PC
+2. Favourite colour?            -> (private)
+3. Tumhe kiski yaad aati hai?   -> (private)
+4. Tumhara kaam kya hai?        -> Cybersecurity, forensics, OSINT, AI
+5. Tumhe kya feel hota hai?     -> Feel nahi, load 100% hai
+
+TWIST (30 sec): ek private baat bol, phir poochh "yeh kaise jaana?"
+KILL LINE: "AI jaanta hai, par janta hai kisse - woh main hoon."
+
+RECORDING:
+- Ring light 45 deg, lapel mic 20 cm se
+- Screen brightness 70-80%, darwa karke
+- Har question pe cut, koi shot 8 sec se zyada nahi
+- Zoom punch-in 5-8% on answer
+- Captions white + black outline, question bhi burn-in
+
+BAAT KARNE WALE SCRIPTED HONE CHAHIYE (tabhi viral feel aata hai):
+ANcore Browser (PyQt5, NOT Electron) + ESP32 VR

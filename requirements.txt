@@ -1,0 +1,38 @@
+# ── Core voice (free, offline-capable) ───────────────────────────
+SpeechRecognition>=3.10.0      # STT (free Google web API, no key + offline engines)
+pyttsx3>=2.90                  # TTS, fully offline, free
+pyaudio>=0.2.13                # microphone access (run the README fix if install fails)
+edge-tts>=6.1.0                # Microsoft Edge neural voices (multiple male/female voices)
+imageio-ffmpeg>=0.4.9          # converts edge-tts WebM audio -> WAV for playback
+
+# ── Microphone capture (needed by Google STT + wake word) ────────
+sounddevice>=0.4.6             # raw audio capture
+
+# ── Brain / LLM backends (all optional, pick what you have) ──────
+requests>=2.31.0               # talks to Ollama (local, free) or Groq (free cloud tier)
+
+# ── Skills (system control + info) ──────────────────────────────
+psutil>=5.9.0                  # system stats (cpu, battery, ram)
+pyautogui>=0.9.54              # screenshots, window/key control
+wikipedia>=1.4.0               # quick factual lookups (free)
+keyboard>=0.13.5               # global hotkey (Ctrl+J voice command)
+pycaw>=20230407 ; sys_platform == "win32"   # Windows volume control
+comtypes>=1.2.0 ; sys_platform == "win32"  # COM interop (needed by pycaw)
+
+# ── Text processing ─────────────────────────────────────────────
+nltk>=3.10.3                    # offline WordNet definitions (~155k words, data on D drive)
+# (No additional deps needed except nltk; re is built-in)
+
+# ── Security (AK Crypto vault, AES-256-GCM) ─────────────────────
+cryptography>=42.0.0             # best-in-class authenticated encryption for AK secrets
+
+# ── AK Mobile server (optional: chat / call bridge) ─────────────
+aiohttp>=3.9.0                   # HTTP + WebRTC signalling for ak_server.py
+aiortc>=1.6.0                    # WebRTC voice call (may need a C toolchain)
+
+# ── AK HUD: gesture control + holographic HUD + vision intel ────
+mediapipe>=0.10.14                # hand / face / pose landmarks + segmentation (CPU)
+opencv-contrib-python>=4.9.0      # camera capture, drawing, frame processing
+numpy>=1.26                       # array maths for the renderer
+PyQt5>=5.15.9                     # transparent always-on-top holographic overlay
+Pillow>=10.0                      # image helpers
